@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/auth/', include('users.urls')),
     path('api/', include('donations.urls')),
     path('api/beneficiaries/', include('beneficiaries.urls')),
+    path('api/', include('testimonials.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
