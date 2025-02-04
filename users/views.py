@@ -1,20 +1,19 @@
 from django.shortcuts import render
-from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework import generics,permissions
 from django.contrib.auth import get_user_model
-from .serializers import RegisterSerializer, UserSerializer
+from django.http import HttpResponse
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .serializers import UserRegistrationSerializer, CustomTokenObtainPairSerializer
 
 User = get_user_model()
 
-class RegissterView(CreateAPIView):
+class UserRegistrationView(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+    serializer_class =UserRegistrationSerializer
+    permission_classes =[permissions.AllowAny]
 
-class ProfileView(RetrieveUpdateAPIView):
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
-    def get_object(self):
-        return self.request.user
+def home_view(request):
+    return HttpResponse("<h1>Welcome to Donations System App!</h1>")
