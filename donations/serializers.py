@@ -3,5 +3,5 @@ from .models import Donation
 
 class DonationSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Donation
+        model = Donation
         fields = '__all__'
