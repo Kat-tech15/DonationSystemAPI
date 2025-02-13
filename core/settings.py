@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'donations',
     'beneficiaries',
     'testimonials',
+    'logistics',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+GOOGLE_MAPS_API_KEY = 'your_google_maps_api_key_here'
