@@ -77,7 +77,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UERNAME_REQUIRED = False
 
@@ -85,7 +85,16 @@ REST_USE_JWT = True
 JWT_AUTH_COOKIE ='jwt-auth'
 JWT_AUTH_REFRESH_COOKIE = 'jwt-refersh'
 
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": "your-google-client-id",
+            "secret": "your-google-secret",
+            "key": "",
+    }
+ } 
 
+}
 
 ROOT_URLCONF = 'core.urls'
 
