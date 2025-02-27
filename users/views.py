@@ -13,8 +13,12 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django.conf import settings
-from twilio.rest import client
-
+from twilio.rest import Client
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from django.core.mail import send_mail
 
 User = get_user_model()
 
@@ -55,3 +59,50 @@ class OTPLoginView(APIView):
         )
 
         return Response({"message": "OTP send succesfully"}, status=status.HTTP_200_OK)
+    
+class ForgortPasswordView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        email = request.data.get("email")
+        user = User.objects.filter(email=email).first()
+
+        if user:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_url = f"{settings.FRONTED_URL}/reset-password/{uid}/{token}"
+
+
+            send_mail(
+                "Rest Password", 
+                f"Click here to reset your password: {reset_url}",
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+
+        return Response({"message": "If your email is registered, a reset link has been sent."})
+
+class ResetPasswordView(APIView):
+    permission_classes =[AllowAny]
+
+    def post(self, request):
+        uid = request.data.get("uid")
+        token = request.data.get("token")
+        new_password = request.data.get("new_password")
+
+
+        try:
+            uid = urlsafe_base64_decode(uid).decode()
+            user = User.objects.get(pk=uid)
+
+            if default_token_generator.check_token(user, token):
+                user.set_password(new_password)
+                user.save()
+                return Response({"message": "Password reset successfully"})
+            
+            else:
+                return Response({"error": "invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+            
+        except:
+            return Response({"error": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
