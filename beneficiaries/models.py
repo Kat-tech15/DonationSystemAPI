@@ -9,16 +9,40 @@ class Beneficiary(models.Model):
         ('LOW_INCOME', 'Low Income Family'),
 
     )
+    GENDER_CHOICES = (
+        ('MALE', 'Male'),
+        ('FEMALE','Female'),
+        ('OTHER', 'Other'),
+    )
     EDUCATIONAL_LEVEL_CHOICES =(
         ('PRIMARY', 'Primary '),
         ('SECONDARY', 'Secondary'),
         ('TERTIARY', 'Tertiary'),
     )
+    ACADEMIC_PERFORMANCE =(
+        ('EXCELLENT', 'Excellent (80-100%)'),
+        ('GOOD', 'Good (60-79%)'),
+        ('AVERAGE', 'Average (40-59%)'),
+        ('BELOW_AVERAGE', 'Below Average (20-39%)'),
+        ('POOR', 'Poor (0-19%)'),
+    )
+    #name= models.CharField(max_length=255)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='beneficiary')
     needy_status = models.CharField(max_length=20, choices=NEEDY_STATUS_CHIOCES)
     institution_name = models.CharField(max_length=20, choices=EDUCATIONAL_LEVEL_CHOICES, blank=True, null=True)
     academic_performance = models.CharField(max_length=255, blank=True, null=True)
     supporting_documents =models.FileField(upload_to='beneficiary_documents/', blank=True, null=True)
+    age = models.PositiveBigIntegerField(default=18)
+    gender = models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES,
+        default='other'
+    )
+    academic_performance = models.CharField(
+        max_length=20,
+        choices=ACADEMIC_PERFORMANCE,
+        default='average'
+    )
     application_status = models.CharField(max_length=20, default='PENDING', choices=(
         ('PENDING', 'Pending'),
         ('APPROVED', 'Approved'),

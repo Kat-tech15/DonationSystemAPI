@@ -19,3 +19,5 @@ class DonationSerializer(serializers.ModelSerializer):
             return{k: data[k] for k in ['id', 'donor', 'donation_type', 'material_type', 'quantity', 'gps_location', 'timestamp']}
         elif instance.donation_type == 'furniture':
             return{k: data[k] for k in ['id', 'donor', 'donation_type', 'material_type', 'quantity', 'gps_location', 'timestamp']}
+        
+        return data if data else {}

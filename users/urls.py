@@ -6,12 +6,12 @@ from .views import OTPLoginView, ForgortPasswordView, ResetPasswordView
 from .views import UserRegistrationView, CustomTokenObtainPairView
 
 urlpatterns = [
-    path('register/', UserRegistrationView.as_view(),name='register'),
-    path('login/', CustomTokenObtainPairView.as_view(), name='login'),
-    path('auth/logout/', LogoutView.as_view(), name='logout'),
-    path('auth/google/', LoginView.as_view(), name='google_login'),
-    path('auth/otp-login/', OTPLoginView.as_view(), name='otp_login'),
-    path('auth/password-reset/', ForgortPasswordView.as_view(), name='password_reset'),
-    path('auth/password-reset/confirm/', ResetPasswordView.as_view(), name='password_reset_confirm'),
-    path('auth/', include('allauth.socialaccount.urls')),
+    path('api/register/', UserRegistrationView.as_view(),name='register'),
+    path('api/login/', CustomTokenObtainPairView.as_view(), name='login'),
+    path('api/auth/logout/', LogoutView.as_view(), name='logout'),
+    path('api/auth/google/', LoginView.as_view(), name='google_login'),
+    path('api/auth/otp-login/', OTPLoginView.as_view(), name='otp_login'),
+    path('api/auth/password-reset/', ForgortPasswordView.as_view(), name='password_reset'),
+    path('api/auth/password-reset/confirm/', ResetPasswordView.as_view(), name='password_reset_confirm'),
+    path('api/auth/', include('allauth.socialaccount.urls')),
 ]

@@ -19,9 +19,9 @@ class Donation(models.Model):
         ('PAYPAL', 'PayPal'),
         ('CASH', 'CAsh'),
     )
-    donor = models. ForeignKey(User, on_delete=models.CASCADE, related_name='donations')
+    donor = models. ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     donation_type = models.CharField(max_length=20, choices=DONATION_TYPES)
-    amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     item_name = models.CharField(max_length=255, null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
     material_type = models.CharField(max_length=255, null=True, blank=True)

@@ -3,7 +3,7 @@ from .views import BeneficiaryApplyView,BeneficiaryStatusView, BeneficiaryDetail
 
 
 urlpatterns =[
-    path('apply/', BeneficiaryApplyView.as_view(), name='beneficiary-apply'),
-    path('status/', BeneficiaryStatusView.as_view(), name='benefciary-status'),
-    path('<int:pk>/', BeneficiaryDetailview.as_view(), name='beneficiary-detail'),
+    path('api/beneficiaries/apply/', BeneficiaryApplyView.as_view(), name='beneficiary-apply'),
+    path('api/beneficiaries/status/', BeneficiaryStatusView.as_view(), name='benefciary-status'),
+    path('api/beneficiaries/<int:pk>/', BeneficiaryDetailview.as_view(), name='beneficiary-detail'),
 ]
