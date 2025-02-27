@@ -38,8 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'gjango_otp',
+    'django_otp.plugins.otp_email',
+    'django_otp.plugins.otp_static',
     'users',
     'donations',
     'beneficiaries',
@@ -56,12 +66,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.authentication.AllAuthJWTAuthentication',
     ),
 }
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UERNAME_REQUIRED = False
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE ='jwt-auth'
+JWT_AUTH_REFRESH_COOKIE = 'jwt-refersh'
+
 
 
 ROOT_URLCONF = 'core.urls'
