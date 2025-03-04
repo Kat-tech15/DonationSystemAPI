@@ -106,3 +106,10 @@ class ResetPasswordView(APIView):
             
         except:
             return Response({"error": "Invalid request"}, status=status.HTTP_400_BAD_REQUEST)
+        
+class CustomLoginView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 200:
+            return Response({'message': 'Login succesful', 'access': response.data['access'], 'refresh': response.data['refresh']})
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
