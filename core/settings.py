@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'beneficiaries',
     'testimonials',
     'logistics',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -178,3 +179,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 GOOGLE_MAPS_API_KEY = 'your_google_maps_api_key_here'
+
+STRIPE_SECRET_KEY = "sk_test_xxxxxxxxxxxxxx" 
+STRIPE_WEBHOOK_SECRET = "whsec_xxxxxxxxxxxxxx"  
