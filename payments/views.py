@@ -29,17 +29,16 @@ class StripeSessionView(APIView):
         if serializer.is_valid():
             try:
                 intent = stripe.PaymentIntent.create(
-                    amount=int(serializer.validated_data['amount'] * 100),
-                    currency = serializer.validated _data['currency'],
-                    metadata ={'transaction_id': serializer.validted_data['transaction_id']}
-
+                    amount=int(serializer.validated_data['amount'] * 100),  # amount in cents
+                    currency=serializer.validated_data['currency'],
+                    metadata={'transaction_id': serializer.validated_data['transaction_id']}
                 )
                 serializer.save(status='pending')
-                return Response({'client_secret': intent.client_secret},status=status.HTTP_201_CREATED)
-            except stripe.error.SrtipeError as e:
+                return Response({'client_secret': intent.client_secret}, status=status.HTTP_201_CREATED)
+            except stripe.error.StripeError as e:
                 return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-            return Response(serializer.errords, status=status.HTTP_400_BAD_REQUEST)
-        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+           
 class StripeWebhookView(APIView):
     def post(self, request):
         payload = request.body
