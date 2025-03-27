@@ -4,6 +4,7 @@ from donations.models import Donation
 import googlemaps
 from django.conf import settings
 import uuid
+from uuid import uuid4
 
 class Location(models.Model):
     name = models. CharField(max_length=255) 
@@ -18,7 +19,7 @@ class Location(models.Model):
     
 class Delivery(models.Model):
     donation = models.OneToOneField(Donation, on_delete=models.CASCADE, related_name='delivery')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='deliveries')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     pickup_location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='pickups')
     dropoff_location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='dropoffs')
     scheduled_pickup_time = models.DateTimeField()
@@ -27,7 +28,7 @@ class Delivery(models.Model):
         ('IN_TRANSIT', 'In Transit'),
         ('DELIVERED', 'Delivered'),
     ),default='PENDING')
-    tracking_code = models.CharField(max_length=100, unique=True, editable=False)
+    tracking_code = models.CharField(max_length=100, unique=True, default=lambda:(uuid4()), editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

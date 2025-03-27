@@ -75,6 +75,7 @@ REST_FRAMEWORK = {
         #'dj_rest_auth.authentication.AllAuthJWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
