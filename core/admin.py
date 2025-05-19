@@ -30,4 +30,4 @@ class CustomAminView(admin.AdminSite):
 admin_site = CustomAminView(name='custom_admin')
 admin_site.register(User, UserAdmin)
 admin_site.register(Donation, DonationAdmin)
-admin_site.register(Beneficiary, BeneficiaryAdmin)
+admin_site.register(Beneficiary, BeneficiaryAdmin, )

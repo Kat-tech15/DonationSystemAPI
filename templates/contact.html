@@ -1,0 +1,18 @@
+{%  extends home.html %}
+{%  block content %}
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>Feel free to reach us for collaboration and discussions on how to transform more lifes.</p>
+    <div class="contact-form">
+        {% csrf_token %}
+        <label for="name" name>FullName :</label>
+        <input type="text" name="name" placeholder="Enter Your FullName"> <br>
+
+        <label for="email">Email :</label>
+        <input type="text" name="email" placeholder="Enter Your Email"><br>
+        
+        <textarea name="message" id="message" placeholder="Enter Your Message Here" rows="5">Message</textarea>
+
+    </div>
+</section>
+{% endblock %}

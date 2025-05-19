@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KATWAI FOUNDATION</title>
+</head>
+<body>
+    {% block contenet %}
+    <header>Katwai Foundation</header>
+    <div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}"></a>About</li>
+                <li><a href="{% url 'services' %}"></a>Services</li>
+                <li><a href="{% url 'contact'%}"></a>Contact</li>
+            </ul>
+        </nav>
+    </div>
+    <section id="home">
+        <p>Welcome to Katwai Foundation🤗 <br>
+            We aim at transfroming the lifes of the less fortunate in the society.
+        </p>
+        <div class="hero-buttons">
+            <a href="{% url 'about' %}">Learn More</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </div>
+        <p>&copy; 2025 Katwai Foundation. All Rights Reserved.</p>
+    </section>
+    {% endblock %}
+</body>
+</html>

@@ -52,4 +52,4 @@ class Beneficiary(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.needy_status}"
+        return f"{self.user.username} - {self.needy_status}" 
