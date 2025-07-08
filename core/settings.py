@@ -72,7 +72,7 @@ SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'dj_rest_auth.authentication.AllAuthJWTAuthentication',
+        'dj_rest_auth.authentication.AllAuthJWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
