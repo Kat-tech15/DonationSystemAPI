@@ -4,7 +4,7 @@ from .views import ImpactMerticsView
 
 
 urlpatterns =[
-    path('api/testimonials/', TestimonialListView.as_view(),name='testimonial-list'),
-    path('api/testimonials/submit/', TestimonialCreateView.as_view(),name='testimonial-submit'),
-    path('api/impact/metrics/', ImpactMerticsView.as_view(), name='impact-metrics'),
+    path('testimonials/', TestimonialListView.as_view(),name='testimonial-list'),
+    path('testimonials/submit/', TestimonialCreateView.as_view(),name='testimonial-submit'),
+    path('impact/metrics/', ImpactMerticsView.as_view(), name='impact-metrics'),
 ]

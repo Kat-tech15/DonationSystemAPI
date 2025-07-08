@@ -5,7 +5,7 @@ from rest_framework import viewsets, serializers
 class Donation(models.Model):
     DONATION_TYPES = (
         ('MONEY', 'Money'),
-        ('SCHOOL_ITEMS', 'School Items'),
+        ('STATIONERY', 'Stationary'),
         ('FOOD', 'Food'),
         ('FURNITURE', 'Furniture'),
     )
@@ -17,14 +17,13 @@ class Donation(models.Model):
         ('MPESA', 'M-Pesa'),
         ('BANK', 'Bank Transfer'),
         ('PAYPAL', 'PayPal'),
-        ('CASH', 'CAsh'),
+        ('CASH', 'Cash'),
     )
     donor = models. ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     donation_type = models.CharField(max_length=20, choices=DONATION_TYPES)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     item_name = models.CharField(max_length=255, null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
-    material_type = models.CharField(max_length=255, null=True, blank=True)
     payment_method = models.CharField(max_length=50,  choices=PAYMENT_METHODS, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, default='PENDING')
