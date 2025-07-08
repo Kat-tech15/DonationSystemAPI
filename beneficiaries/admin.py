@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import Beneficiary,ContactMessage
+from .models import Beneficiary
 
 # Register your models here.
 admin.site.register(Beneficiary)
-admin.site.register(ContactMessage)
 
 #@admin.action(description='approve selected beneficiaries')
 def approve_beneficiaries(modeladmin, request, queryset):

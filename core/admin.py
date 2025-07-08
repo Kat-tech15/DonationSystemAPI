@@ -1,12 +1,18 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 from django.urls import path
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from django.db.models import Count,Sum
+from beneficiaries.admin import BeneficiaryAdmin
+from donations.admin import DonationAdmin
 from donations.models import Donation   
 from beneficiaries.models import Beneficiary
 
+User = get_user_model()
 
-class CustomAminView(admin.AdminSite):
+class CustomAdminView(admin.AdminSite):
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
@@ -27,7 +33,7 @@ class CustomAminView(admin.AdminSite):
         return render(request, 'admin/impact_metrics.html', context)
     
 
-admin_site = CustomAminView(name='custom_admin')
+admin_site = CustomAdminView(name='custom_admin')
 admin_site.register(User, UserAdmin)
 admin_site.register(Donation, DonationAdmin)
-admin_site.register(Beneficiary, BeneficiaryAdmin, )
+admin_site.register(Beneficiary, BeneficiaryAdmin)
