@@ -39,6 +39,7 @@ class Beneficiary(models.Model):
     supporting_documents =models.FileField(upload_to='beneficiary_documents/', blank=True, null=True)
     age = models.PositiveBigIntegerField(default=18)
     gender = models.CharField( max_length=10,choices=GENDER_CHOICES,default='other')
+    education_level = models.CharField(max_length=20, choices=EDUCATIONAL_LEVEL_CHOICES, default='secondary')
     academic_performance = models.CharField(max_length=20,choices=ACADEMIC_PERFORMANCE,default='average')
     application_status = models.CharField(max_length=20, default='PENDING', choices=APPLICATION_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -81,8 +81,8 @@ REST_FRAMEWORK = {
 
 
 ACCOUNT_LOGIN_METHODS = {"email"}
-ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 
 REST_USE_JWT = True
 JWT_AUTH_COOKIE ='jwt-auth'

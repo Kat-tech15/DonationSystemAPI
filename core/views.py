@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import ContactMessage
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 from django.contrib import messages
 
 def home(request):
@@ -25,3 +27,7 @@ def contact(request):
         contact.save()
         messages.success = (request, 'Your message was submitted successfully.')
     return render(request, 'contact.html')
+
+@login_required
+def admin_dashboard(request):
+    return redirect(request, 'admin_dashboard.html')
