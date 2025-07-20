@@ -24,10 +24,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
-    path('api/users', include('users.urls')),
-    path('api/donations/', include('donations.urls')),
-    path('api/beneficiaries/', include('beneficiaries.urls')),
-    path('api/testimonials/', include('testimonials.urls')),
-    path('api/logistics/', include('logistics.urls')),
-    path('api/payments/', include('payments.urls')),
+    path('api/', include('users.urls')),
+    path('api/', include('donations.urls')),
+    path('api/', include('beneficiaries.urls')),
+    path('api/', include('testimonials.urls')),
+    path('api/', include('logistics.urls')),
+    path('api/ ', include('payments.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
