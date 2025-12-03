@@ -1,18 +1,17 @@
 from django.shortcuts import render
-from rest_framework import generics,serializers
+from rest_framework import generics,serializers, permissions
 from .models import Donation
 from rest_framework.generics import RetrieveAPIView
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.exceptions import ValidationError
 from .serializers  import DonationSerializer
 
 class DonationCreateView(generics.CreateAPIView):
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
         if self.request.user.is_authenticated:
@@ -23,7 +22,7 @@ class DonationCreateView(generics.CreateAPIView):
 class DonationListView(generics.ListAPIView):
     queryset = Donation.objects.all().order_by('-timestamp')
     serializer_class = DonationSerializer
-    permission_classes= [AllowAny]
+    permission_classes= [permissions.AllowAny]
 
 class DonationDetailView(generics.RetrieveAPIView):
     queryset = Donation.objects.all()

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'rest_framework',
+    'drf_yasg',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'dj_rest_auth',
@@ -77,6 +78,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PERMISSION_CLASSES': {
+        'rest_framework.permissions.IsAuthenticated',
+    }
 }
 
 
@@ -179,8 +183,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIR = [
+    (BASE_DIR, 'static'),
+]
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 GOOGLE_MAPS_API_KEY = 'your_google_maps_api_key_here'
 
 STRIPE_SECRET_KEY = "sk_test_xxxxxxxxxxxxxx" 
-STRIPE_WEBHOOK_SECRET = "whsec_xxxxxxxxxxxxxx"  
+STRIPE_WEBHOOK_SECRET = "whsec_xxxxxxxxxxxxxx"
+  
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'SECURITY_DEFINITIONS': {
+        'TokenAuth': {
+            'type': 'apikey',
+            'in': 'header',
+            'name': 'Authorization',
+            'description': 'Format: Token <your_token>',
+        }
+    },
+}
