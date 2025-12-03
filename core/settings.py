@@ -194,15 +194,15 @@ GOOGLE_MAPS_API_KEY = 'your_google_maps_api_key_here'
 
 STRIPE_SECRET_KEY = "sk_test_xxxxxxxxxxxxxx" 
 STRIPE_WEBHOOK_SECRET = "whsec_xxxxxxxxxxxxxx"
-  
+
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,
     'SECURITY_DEFINITIONS': {
-        'TokenAuth': {
-            'type': 'apikey',
+        'Bearer': {
+            'type': 'apiKey',
             'in': 'header',
             'name': 'Authorization',
-            'description': 'Format: Token <your_token>',
+            'description': 'JWT Authorization header using the Bearer scheme. Example: "Bearer <your_token>"',
         }
     },
 }

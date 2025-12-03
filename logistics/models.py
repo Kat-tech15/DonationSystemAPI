@@ -6,6 +6,10 @@ from django.conf import settings
 import uuid
 from uuid import uuid4
 
+def generate_tracking_code():
+    return str(uuid.uuid4()).replace("-", "")[:10]
+
+
 class Location(models.Model):
     name = models. CharField(max_length=255) 
     address = models. CharField(max_length=255)
@@ -28,7 +32,7 @@ class Delivery(models.Model):
         ('IN_TRANSIT', 'In Transit'),
         ('DELIVERED', 'Delivered'),
     ),default='PENDING')
-    tracking_code = models.CharField(max_length=100, unique=True, default=lambda:(uuid4()), editable=False)
+    tracking_code = models.CharField(max_length=100, unique=True, default=generate_tracking_code, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

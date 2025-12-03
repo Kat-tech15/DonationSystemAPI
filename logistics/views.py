@@ -8,7 +8,7 @@ from donations.models import Donation
 
 class LocationListView(generics.ListAPIView):
     """View to list all active donation drop-off points."""
-    queryset =Location.objects.filter(is_active=False)
+    queryset =Location.objects.filter(is_active=True)
     serializer_class = LocationSerializer
     permission_classes = [permissions.AllowAny]
 

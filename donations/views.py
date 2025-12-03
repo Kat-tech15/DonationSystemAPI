@@ -27,6 +27,7 @@ class DonationListView(generics.ListAPIView):
 class DonationDetailView(generics.RetrieveAPIView):
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
         obj = get_object_or_404(Donation, pk=self.kwargs.get('pk'))
