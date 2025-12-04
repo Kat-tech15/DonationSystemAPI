@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from dotenv import load_dotenv
+load_dotenv()
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -21,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=5pgl%4(7++#$hz(o+(1puv#ehz%md3k-2jwy%qla!5(-87qf&'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://donationsystemapi.onrender.com/']
 
 
 # Application definition
@@ -95,8 +97,8 @@ JWT_AUTH_REFRESH_COOKIE = 'jwt-refersh'
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "your-google-client-id",
-            "secret": "your-google-secret",
+            "client_id": os.getenv('GOOGLE_CLIENT_ID'),
+            "secret": os.getenv('GOOGLE_CLIENT_SECRET'),
             "key": "",
     }
  } 
@@ -125,15 +127,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # SQLite database file in your project root
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
@@ -190,10 +191,10 @@ STATICFILES_DIR = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-GOOGLE_MAPS_API_KEY = 'your_google_maps_api_key_here'
+GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
 
-STRIPE_SECRET_KEY = "sk_test_xxxxxxxxxxxxxx" 
-STRIPE_WEBHOOK_SECRET = "whsec_xxxxxxxxxxxxxx"
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': False,

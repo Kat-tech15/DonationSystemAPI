@@ -3,6 +3,7 @@ certifi==2025.11.12
 cffi==2.0.0
 charset-normalizer==3.4.4
 cryptography==46.0.3
+dj-database-url==3.0.1
 dj-rest-auth==7.0.1
 Django==5.2.8
 django-allauth==65.13.1
@@ -14,7 +15,6 @@ googlemaps==4.10.0
 gunicorn==23.0.0
 idna==3.11
 inflection==0.5.1
-mysqlclient==2.2.7
 packaging==25.0
 pillow==12.0.0
 psycopg2-binary==2.9.11
